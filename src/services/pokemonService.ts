@@ -13,7 +13,7 @@ export const createPokemon = async (
   level: number
 ) => {
   const pokemon = new Pokemon({ name, pokemonType, level });
-  return await pokemon.save();
+  return (await pokemon.save()).toObject();
 };
 
 /**
@@ -21,5 +21,5 @@ export const createPokemon = async (
  * @returns
  */
 export const findAllPokemon = async () => {
-  return await Pokemon.find();
+  return await Pokemon.find().lean();
 };

@@ -3,18 +3,24 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node src/app.ts",
+    "dev": "ts-node-dev src/app.ts",
+    "cli": "ts-node cli.ts",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "commander": "^12.1.0",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "mongoose": "^8.6.0"
   },
   "devDependencies": {
+    "@types/commander": "^2.12.0",
     "@types/express": "^4.17.21",
     "@types/jest": "^29.5.12",
     "@types/mongoose": "^5.11.96",
