@@ -2,6 +2,7 @@ import { program } from "commander";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import * as pokemonService from "./src/services/pokemonService";
+import * as poffinService from "./src/services/poffinService";
 
 dotenv.config();
 
@@ -54,7 +55,7 @@ program
   });
 
 program
-  .command("delete <id>")
+  .command("delete-pokemon <id>")
   .description("delete one pokemon")
   .action(async (id) => {
     await connectToDatabase();
@@ -63,6 +64,36 @@ program
       console.log("pokemon was successsfully deleted");
     } catch (error) {
       console.log("Error deleting Pokemon", error);
+    } finally {
+      await mongoose.disconnect();
+    }
+  });
+
+program
+  .command("create-poffin <poffinName> <frindshipLoyalty>")
+  .description("create one poffin")
+  .action(async (poffinName, frindshipLoyalty) => {
+    await connectToDatabase();
+    try {
+      await poffinService.createPoffin(poffinName, frindshipLoyalty);
+      console.log("poffin was sucessfully created");
+    } catch (error) {
+      console.log("error creating Poffin", error);
+    } finally {
+      await mongoose.disconnect();
+    }
+  });
+
+program
+  .command("feed-poffin <poffinName> <pokemoId>")
+  .description("feed poffin")
+  .action(async (poffinName, pokemonId) => {
+    await connectToDatabase();
+    try {
+      await poffinService.givePoffin(poffinName, pokemonId);
+      console.log("poffin was sucessfully created");
+    } catch (error) {
+      console.log("error creating Poffin", error);
     } finally {
       await mongoose.disconnect();
     }

@@ -33,6 +33,8 @@ interface IPokemon extends Document {
   name: string;
   pokemonType: PokemonType;
   level: number;
+  friendshipLoyalty: number;
+  evolveByFriendship: boolean;
 }
 const PokemonSchema: Schema = new Schema<IPokemon>({
   name: {
@@ -52,6 +54,18 @@ const PokemonSchema: Schema = new Schema<IPokemon>({
     required: true,
     min: 1,
     max: 100,
+  },
+  friendshipLoyalty: {
+    type: Number,
+    required: true,
+    min: 1,
+    max: 80,
+    default: 1,
+  },
+  evolveByFriendship: {
+    type: Boolean,
+    required: true,
+    default: false,
   },
 });
 

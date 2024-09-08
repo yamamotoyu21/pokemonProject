@@ -9,10 +9,23 @@ const app = express();
 
 app.use(express.json());
 
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  console.error("MONGODB_URI is not set in the environment variables");
+  process.exit(1);
+}
+
+console.log("Attempting to connect to MongoDB...");
+console.log("MONGODB_URI:", MONGODB_URI.replace(/\/\/.*@/, "//<credentials>@")); // クレデンシャルを隠す
+
 mongoose
-  .connect(process.env.MONGODB_URI || "mongodb://localhost:27017/pokemon-game")
-  .then(() => console.log("Connected to MongoDB"))
-  .catch((err) => console.error("MongoDB connection error:", err));
+  .connect(MONGODB_URI)
+  .then(() => console.log("Connected to MongoDB successfully"))
+  .catch((err) => {
+    console.error("MongoDB connection error:", err);
+    process.exit(1);
+  });
 
 app.use("/api/pokemon", pokemonRoutes);
 
