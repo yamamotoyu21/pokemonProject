@@ -13,9 +13,19 @@ export const createPokemon = async (req: Request, res: Response) => {
 
 export const getAllPokemon = async (req: Request, res: Response) => {
   try {
-    const pokemon = await pokemonService.findAllPokemon();
+    const pokemons = await pokemonService.findAllPokemon();
     res.status(200).json();
   } catch (error) {
     res.status(500).json({ error: "Failed to find pokemon" });
+  }
+};
+
+export const deletePokemon = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.body;
+    await pokemonService.deletePokemon(id);
+    res.status(200).json();
+  } catch (error) {
+    res.status(500).json({ error: `Failed to delete pokemon` });
   }
 };

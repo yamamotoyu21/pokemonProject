@@ -23,3 +23,10 @@ export const createPokemon = async (
 export const findAllPokemon = async () => {
   return await Pokemon.find().lean();
 };
+
+/**
+ * Delete a Pokemon
+ */
+export const deletePokemon = async (id: string) => {
+  return await Pokemon.deleteOne({ _id: id });
+};

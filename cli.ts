@@ -53,4 +53,19 @@ program
     }
   });
 
+program
+  .command("delete <id>")
+  .description("delete one pokemon")
+  .action(async (id) => {
+    await connectToDatabase();
+    try {
+      await pokemonService.deletePokemon(id);
+      console.log("pokemon was successsfully deleted");
+    } catch (error) {
+      console.log("Error deleting Pokemon", error);
+    } finally {
+      await mongoose.disconnect();
+    }
+  });
+
 program.parse(process.argv);
