@@ -9,7 +9,8 @@ const app = express();
 
 app.use(express.json());
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI =
+  process.env.MONGODB_URI || "mongodb://localhost:27017/pokemon-game";
 
 if (!MONGODB_URI) {
   console.error("MONGODB_URI is not set in the environment variables");
